@@ -20,6 +20,12 @@ namespace IDE
 
         public static void Compile(string input)
         {
+
+            if (File.Exists(Settings.ErrorFile))
+                File.Delete(Settings.ErrorFile);
+            if (File.Exists(Settings.OutputTempFile))
+                File.Delete(Settings.OutputTempFile);
+
             //Save input
             File.WriteAllText(Settings.InputTempFile, input);
 

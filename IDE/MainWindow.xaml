@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Le Language IDE, v 1.0" Height="350" Width="525">
-    <Grid>
- 
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
@@ -15,38 +14,42 @@
         <DockPanel Grid.Row="0">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="File">
-                    <MenuItem Header="Open"/>
-                    <MenuItem Header="Save"/>
-                    <MenuItem Header="Exit"/>
+                    <MenuItem Header="Open" Click="MenuItem_Open_Click"/>
+                    <MenuItem Header="Save" Click="MenuItem_Save_Click"/>
+                    <MenuItem Header="Exit" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
                 <MenuItem Header="Build">
-                    <MenuItem Header="Compile">
-                        <MenuItem Header="C" Click="CompilerC_Click" />
+                    <MenuItem Header="Compile in C" Click="MenuItem_CompileinC_Click">
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Code Snnipets">
-                    <MenuItem Header="Hello World">
-                    </MenuItem>
+                <MenuItem Header="Code Snippets">
+                    <MenuItem Header="Hello World" Click="MenuItem_HelloWorld_Click"/>
+                    <Separator />
+                    <MenuItem Header="Read/Write" Click="MenuItem_ReadWrite_Click"/>
+                    <MenuItem Header="Loops" Click="MenuItem_Loops_Click"/>
+                    <MenuItem Header="Conditions" Click="MenuItem_Conditions_Click"/>
+                    <Separator />
+                    <MenuItem Header="Error Demo" Click="MenuItem_ErrorDemo_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Name="CodeGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DockPanel Grid.Column="0">
+            <DockPanel Grid.Column="0" >
                 <TextBlock Text="{Binding LineCount.Lines}" TextWrapping="Wrap" Width="20"/>
-                <RichTextBox x:Name="TxtBox" TextChanged="TxtBox_TextChanged" Background="Black" Foreground="White" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" >
+                <RichTextBox x:Name="LeCodeBox" TextChanged="LeCodeBox_TextChanged" Background="Black" Foreground="White" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" >
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
-                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="Margin" Value="1.9"/>
                         </Style>
                     </RichTextBox.Resources>
                 </RichTextBox>
             </DockPanel>
-            <DockPanel Grid.Column="1">
-                <RichTextBox x:Name="CompiledBox" TextChanged="TxtBox_TextChanged" Background="Black" Foreground="White" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" Margin="20,0,0,0" >
+            <DockPanel Grid.Column="1" Margin="50,0,0,0">
+                <RichTextBox x:Name="CompiledBox" Background="Black" Foreground="Aquamarine" FontFamily="Consolas" VerticalScrollBarVisibility="Auto" Margin="20,0,0,0"  IsReadOnly="True">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="2"/>
@@ -55,7 +58,6 @@
                 </RichTextBox>
             </DockPanel>
         </Grid>
-
         <ListView Margin="5" Name="ErrorListView" Grid.Row="2" SelectionMode="Single" SelectionChanged="ErrorListView_SelectionChanged">
             <ListView.View>
                 <GridView >
